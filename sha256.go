@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"crypto/sha256"
 	"fmt"
 	"io"
@@ -20,8 +21,9 @@ func sha256_(path, raw string) {
 			return
 		}
 		var data = make([]byte, 4096)
+		r := bufio.NewReader(fd)
 		for {
-			n, err = fd.Read(data)
+			n, err = r.Read(data)
 			if err != nil {
 				if err == io.EOF {
 					break
